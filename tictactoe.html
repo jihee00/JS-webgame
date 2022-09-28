@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>틱택토</title>
+    <title>ticktactoe</title>
     <style>
         table {
             border-collapse: collapse;
@@ -27,14 +27,13 @@
 	let turn = 'O';
 
 	const callback = (event) => {
-		//칸이 비었나?
 		if(event.target.textContent !== '') {
-			console.log('빈칸이 아닙니다.');
+			console.log('It is not blank');
 			return;
 		}
-		console.log('빈칸입니다.');
+		console.log('It is blank');
 		event.target.textContent = turn;
-		//승부확인
+
 		turn = turn === 'O' ? 'X' : 'O';
 		if(turn === 'O') {
 			turn = 'X';

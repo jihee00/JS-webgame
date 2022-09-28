@@ -5,16 +5,16 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>끝말잇기</title>
+	<title>word relay</title>
 </head>
 
 <body>
-	<div><span id="order">1</span>번째 참가자</div>
-	<div>제시어: <span id="word"></span></div>
+	<div><span id="order">1</span>th contestant</div>
+	<div>Given word: <span id="word"></span></div>
 	<input type="text">
-	<button>입력</button>
+	<button>submit</button>
 	<script>
-		const number = Number(prompt('몇 명이 참가하나요?'));
+		const number = Number(prompt('How many people are participating?'));
 		if (number) {
 			const $button = document.querySelector('button');
 			const $input = document.querySelector('input');
@@ -23,9 +23,8 @@
 			let word;
 			let newWord;
 			const onClickButton = () => {
-				if ((!word || word[word.length - 1] === newWord[0]) && newWord.length === 3) {//제시어가 비어있는가?
-					//비어있다 //단어가 올바른지 판단하기
-					word = newWord; //입력한 단어가 제시어가 된다
+				if ((!word || word[word.length - 1] === newWord[0]) && newWord.length === 3) {
+					word = newWord; 
 					$word.textContent = word;
 					const order = Number($order.textContent);
 					if (order === number) {
@@ -34,8 +33,7 @@
 						$order.textContent = order + 1;
 					}
 				} else {
-					//틀렸다고 표시하기
-					alert('올바르지 않은 단어입니다!');
+					alert('That is not the right word');
 				}
 				$input.value = '';
 				$input.focus();
