@@ -80,14 +80,8 @@
 			return;
 		}
 
-		let draw = true;
-		rows.forEach((row) => {
-			row.forEach((cell) => {
-				if(!cell.textContent) {
-					draw = false;
-				}
-			});
-		});
+		//Array.from($table.children).forEach(()=>{}) - 유사배열 객체 객체처럼 변경시킬 수 있다. 
+		const draw = rows.flat().every((cell) => cell.textContent);
 		if(draw) {
 			$result.textContent = 'draw';
 			return;
