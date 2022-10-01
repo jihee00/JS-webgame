@@ -26,6 +26,45 @@
 	const rows = [];
 	let turn = 'O';
 
+	const checkWinner = (target) => {
+		const rowIndex = target.parentNode.rowIndex;
+		const cellIndex = target.cellIndex;
+
+		let hasWinner = false;
+		//row check
+		if(
+			rows[rowIndex][0].textContent === turn &&
+			rows[rowIndex][1].textContent === turn &&
+			rows[rowIndex][2].textContent === turn
+		) {
+			hasWinner = true;
+		}
+		//col check
+		if(
+			rows[0][cellIndex].textContent === turn &&
+			rows[1][cellIndex].textContent === turn &&
+			rows[2][cellIndex].textContent === turn
+		) {
+			hasWinner = true;
+		}
+		//diagonal check
+		if(
+			rows[0][0].textContent === turn &&
+			rows[1][1].textContent === turn &&
+			rows[2][2].textContent === turn 
+		) {
+			hasWinner = true;
+		}
+		if(
+			rows[0][2].textContent === turn &&
+			rows[1][1].textContent === turn &&
+			rows[2][0].textContent === turn
+		) {
+			hasWinner = true;
+		}
+		return hasWinner;
+	};
+
 	const callback = (event) => {
 		if(event.target.textContent !== '') {
 			console.log('It is not blank');
@@ -34,13 +73,27 @@
 		console.log('It is blank');
 		event.target.textContent = turn;
 
-		turn = turn === 'O' ? 'X' : 'O';
-		if(turn === 'O') {
-			turn = 'X';
-		} else if(turn === 'X'){
-			turn = 'O';
-		}		
-	}
+		const hasWinner = checkWinner(event.target);
+		if (hasWinner) {
+			$result.textContent = `${turn} Win!`;
+			$table.removeEventListener('click', callback);
+			return;
+		}
+
+		let draw = true;
+		rows.forEach((row) => {
+			row.forEach((cell) => {
+				if(!cell.textContent) {
+					draw = false;
+				}
+			});
+		});
+		if(draw) {
+			$result.textContent = 'draw';
+			return;
+		}
+		turn = turn === 'O' ? 'X' : 'O';	
+	};
 
 	for(let i=0; i<3; i++) {
 		const $tr = document.createElement('tr');
