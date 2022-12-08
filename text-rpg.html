@@ -20,16 +20,16 @@
         <span id="hero-att"></span>
     </div>
     <form id="game-menu" style="display: none;">
-        <div id="menu-1">1.Adventure</div>
-        <div id="menu-2">2.Rest</div>
-        <div id="menu-3">3.Termination</div>
+        <div id="menu-1">1. Adventure</div>
+        <div id="menu-2">2. Rest</div>
+        <div id="menu-3">3. Termination</div>
         <input id="menu-input" />
         <button id="menu-button">Enter</button>
     </form>
     <form id="battle-menu" style="display: none;">
-        <div id="battle-1">1.Attack</div>
-        <div id="battle-2">2.Recovery</div>
-        <div id="battle-3">3.Escape</div>
+        <div id="battle-1">1. Attack</div>
+        <div id="battle-2">2. Recovery</div>
+        <div id="battle-3">3. Escape</div>
         <input id="battle-input" />
         <button id="battle-button">Enter</button>
     </form>
@@ -61,12 +61,20 @@
         hp: 100,
         xp: 0,
         att: 10,
+        attack(monster) {
+            monster.hp -= this.att;
+            this.hp -= monster.att;
+        },
+        heal(monster) {
+            this.hp += 20;
+            this.hp -= monster.att;
+        },
     };
     let monster = null;
     const monsterList = [
-        { name: '슬라임', hp: 25, att: 10, xp: 10 },
-        { name: '스켈레톤', hp: 50, att: 15, xp: 20 },
-        { name: '마왕', hp: 150, att: 35, xp: 50 },
+        { name: 'Slime', hp: 25, att: 10, xp: 10 },
+        { name: 'Skeleton', hp: 50, att: 15, xp: 20 },
+        { name: 'Devil', hp: 150, att: 35, xp: 50 },
     ];
     
     $startScreen.addEventListener('submit', (event) => {
@@ -75,7 +83,7 @@
         $startScreen.style.display = 'none';
         $gameMenu.style.display = 'block';
         $heroName.textContent = name;
-        $heroLevel.textContent = `${hero.lev}Lev`;
+        $heroLevel.textContent = `${hero.lev} Lev`;
         $heroHp.textContent = `HP: ${hero.hp}/${hero.maxHp}`;
         $heroXp.textContent = `XP: ${hero.xp}/${15 * hero.lev}`;
         $heroAtt.textContent = `ATT: ${hero.att}`;
@@ -83,22 +91,35 @@
     });
 
     $gameMenu.addEventListener('submit', (event) => {
-        event.perventDefault();
+        event.preventDefault();
         const input = event.target['menu-input'].value;
-        if (input === '1') {
-
-        } else if (input === '2') {
-        } else if (input === '3') {
+        if (input === '1') { //adventure
+            $gameMenu.style.display = 'none';
+            $battleMenu.style.display = 'block';
+            monster = JSON.parse(
+                JSON.stringify(monsterList[Math.floor(Math.random() * monsterList.length)])
+            );
+            monster.maxHp = monster.hp;
+            $monsterName.textContent = monster.name;
+            $monsterHp.textContent = `HP: ${monster.hp}/${monster.maxHp}`;
+            $monsterAtt.textContent = `ATT: ${monster.att}`;
+        } else if (input === '2') { //rest
+        } else if (input === '3') { //termination
         }
     });
 
     $battleMenu.addEventListener('submit', (event) => {
         event.preventDefault();
         const input = event.target['battle-input'].value;
-        if (input === '1') {
+        if (input === '1') { //attack
+            hero.attack(monster);
+            monster.attack(hero);
+            $heroHp.textContent = `HP: ${hero.hp}/${hero.maxHp}`;
+            $monsterHp.textContent = `HP: ${monster.hp}/${monster.maxHp}`;
+            $message.textContent = `Gave ${hero.att}, Got ${monster.att},`;
 
-        } else if (input === '2') {
-        } else if (input === '3') {
+        } else if (input === '2') { //recovery
+        } else if (input === '3') { //escape
         }
     })
 
