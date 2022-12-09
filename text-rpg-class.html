@@ -1,0 +1,83 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>text-rpg</title>
+</head>
+
+<body>
+<form id="start-screen">
+    <input id="name-input" placeholder="Enter the name of the hero!" />
+    <button id="start">START</button>
+</form>
+<div id="screen">
+    <div id="hero-stat">
+        <span id="hero-name"></span>
+        <span id="hero-level"></span>
+        <span id="hero-hp"></span>
+        <span id="hero-xp"></span>
+        <span id="hero-att"></span>
+    </div>
+    <form id="game-menu" style="display: none;">
+        <div id="menu-1">1. Adventure</div>
+        <div id="menu-2">2. Rest</div>
+        <div id="menu-3">3. Termination</div>
+        <input id="menu-input" />
+        <button id="menu-button">Enter</button>
+    </form>
+    <form id="battle-menu" style="display: none;">
+        <div id="battle-1">1. Attack</div>
+        <div id="battle-2">2. Recovery</div>
+        <div id="battle-3">3. Escape</div>
+        <input id="battle-input" />
+        <button id="battle-button">Enter</button>
+    </form>
+    <div id="message"></div>
+    <div id="monster-stat">
+        <span id="monster-name"></span>
+        <span id="monster-hp"></span>
+        <span id="monster-att"></span>
+    </div>
+</div>
+<script>
+    const $startScreen = document.querySelector('#start-screen');
+    const $gameMenu = document.querySelector('#game-menu');
+    const $battleMenu = document.querySelector('#battle-menu');
+    const $heroName = document.querySelector('#hero-name');
+    const $heroLevel = document.querySelector('#hero-level');
+    const $heroHp = document.querySelector('#hero-hp');
+    const $heroXp = document.querySelector('#hero-xp');
+    const $heroAtt = document.querySelector('#hero-att');
+    const $monsterName = document.querySelector('#monster-name');
+    const $monsterHp = document.querySelector('#monster-hp');
+    const $monsterAtt = document.querySelector('#monster-att');
+    const $message = document.querySelector('#message');
+
+    
+    
+    $startScreen.addEventListener('submit', (event) => {
+        
+    });
+
+    $gameMenu.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const input = event.target['menu-input'].value;
+        if (input === '1') { //adventure
+        } else if (input === '2') { //rest
+        } else if (input === '3') { //termination
+        }
+    });
+
+    $battleMenu.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const input = event.target['battle-input'].value;
+        if (input === '1') { //attack
+        } else if (input === '2') { //recovery
+        } else if (input === '3') { //escape
+        }
+    })
+
+</script>
+</body>
+</html>
