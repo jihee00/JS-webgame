@@ -3,7 +3,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>text-rpg</title>
+    <title>text-rpg-class</title>
 </head>
 
 <body>
@@ -57,27 +57,54 @@
     class Game {
         constructor(name) {
             this.monster = null;
-            this.hero = new Hero(this, name);
+            this.hero = null;
             this.monsterList = [
                 { name: 'Slime', hp: 25, att: 10, xp: 10 },
                 { name: 'Skeleton', hp: 50, att: 15, xp: 20 },
                 { name: 'Devil', hp: 150, att: 35, xp: 50 },
             ];
-            this.start();
+            this.start(name);
         }
-        start() {
+        start(name) {
+            console.log(this);
             $gameMenu.addEventListener('submit', this.onGameMenuInput);
             $battleMenu.addEventListener('submit', this.onBattleMenuInput);
             this.changeScreen('game');
+            this.hero = new Hero(this, name);
+            this.updateHeroStat();
         }
         changeScreen(screen) {
-
+            if (screen === 'start') {
+                $startScreen.style.display = 'block';
+                $gameMenu.style.display = 'none';
+                $battleMenu.style.display = 'none';
+            } else if (screen === 'game') {
+                $startScreen.style.display = 'none';
+                $gameMenu.style.display = 'block';
+                $battleMenu.style.display = 'none';
+            } else if (screen === 'battle') { 
+                $startScreen.style.display = 'none';
+                $gameMenu.style.display = 'none';
+                $battleMenu.style.display = 'block';
+            }
         }
         onGameMenuInput = (event) => {
+            event.preventDefault();
+            const input = event.target['menu-input'].value;
+            if (input === '1') {
+                this.changeScreen('battle');
+            } else if (input === '2') {
+            } else if (input === '3') {
+            }
 
         }
         onBattleMenuInput = (event) => {
-
+            event.preventDefault();
+            const input = event.target['battle-input'].value;
+            if (input === '1') {
+            } else if(input === '2') {
+            } else if(input === '3') {
+            }
         }
     }
     class Hero {
