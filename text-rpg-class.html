@@ -91,19 +91,35 @@
         onGameMenuInput = (event) => {
             event.preventDefault();
             const input = event.target['menu-input'].value;
-            if (input === '1') {
+            if (input === '1') { //adventure
                 this.changeScreen('battle');
-            } else if (input === '2') {
-            } else if (input === '3') {
+                const randomIndex = Math.floor(Math.random() * this.monsterList.length);
+                const randomMonster = this.monsterList[randomIndex];
+                this.monster = new Monster(
+                    this,
+                    randomMonster.name,
+                    randomMonster.hp,
+                    randomMonster.att,
+                    randomMonster.xp,
+                );
+                this.updateMonsterStat();
+                this.showMessage(`I ran into a ${this.monster.name}!`);
+            } else if (input === '2') { //rest
+            } else if (input === '3') { //termination
             }
-
         }
         onBattleMenuInput = (event) => {
             event.preventDefault();
             const input = event.target['battle-input'].value;
-            if (input === '1') {
-            } else if(input === '2') {
-            } else if(input === '3') {
+            if (input === '1') { //attack
+                const { hero, monster } = this;
+                hero.attack(monster);
+                monster.attack(hero);
+                this.showMessage(`Gave ${hero.att}, Got ${monster.att}.`);
+                this.updateHeroStat();
+                this.updateMonsterStat();
+            } else if(input === '2') { //recovery
+            } else if(input === '3') { //escape
             }
         }
         updateHeroStat() {
@@ -121,7 +137,21 @@
             $heroHp.textContent = `HP: ${hero.hp}/${hero.maxHp}`;
             $heroXp.textContent = `XP: ${hero.xp}/${15 * hero.lev}`;
             $heroAtt.textContent = `ATT: ${hero.att}`;
-
+        }
+        updateMonsterStat() {
+            const { monster } = this;
+            if (monster === null) {
+                $monsterName.textContent = '';
+                $monsterHp.textContent = '';
+                $monsterAtt.textContent = '';
+                return;
+            }
+            $monsterName.textContent = monster.name;
+            $monsterHp.textContent = `HP: ${monster.hp}/${monster.maxHp}`;
+            $monsterAtt.textContent = `ATT: ${monster.att}`;
+        }
+        showMessage(text) {
+            $message.textContent = text;
         }
     }
     class Hero {
@@ -142,6 +172,18 @@
             this.hp -= monster.att;
         }
     }
+    class Monster {
+        constructor(game, name, hp, att, xp) {
+            this.game = game;
+            this.name = name;
+            this.maxHp = hp;
+            this.hp = hp;
+            this.xp = xp;
+            this.att = att
+        }
+    }
+
+
     
     let game = null;
     $startScreen.addEventListener('submit', (event) => {
