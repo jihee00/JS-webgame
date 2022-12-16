@@ -215,6 +215,9 @@
             this.xp = xp;
             this.att = att
         }
+        attack(target) {
+            target.hp -= this.att;
+        }
     }
 
     let game = null;
