@@ -134,9 +134,16 @@
                 this.updateHeroStat();
                 this.updateMonsterStat();
             } else if (input === '2') { //recovery
-
+                const { hero, monster } = this;
+                hero.hp = Math.min(hero.maxHp, hero.hp + 20);
+                monster.attack(hero);
+                this.showMessage(`${hero.name}'s hp recovered a little.`);
+                this.updateHeroStat();
             } else if (input === '3') { //escape
                 this.changeScreen('game');
+                this.showMessage(`${hero.name} has escaped!`);
+                this.monster = null;
+                this.updateMonsterStat();
             }
         }
         updateHeroStat() {
@@ -220,6 +227,7 @@
             }
         }
     }
+    
     class Monster extends Unit {
         constructor(game, name, hp, att, xp) {
             super(game, name, hp, att, xp);
