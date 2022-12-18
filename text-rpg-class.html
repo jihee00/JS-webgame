@@ -105,6 +105,9 @@
                 this.updateMonsterStat();
                 this.showMessage(`I ran into a ${this.monster.name}!`);
             } else if (input === '2') { //rest
+                this.hero.hp = this.hero.maxHp; 
+                this.updateHeroStat();
+                this.showMessage(`${hero.name} has been restored to full HP!`);
             } else if (input === '3') { //termination
                 this.showMessage('');
                 this.quit();
@@ -131,6 +134,7 @@
                 this.updateHeroStat();
                 this.updateMonsterStat();
             } else if (input === '2') { //recovery
+
             } else if (input === '3') { //escape
                 this.changeScreen('game');
             }
