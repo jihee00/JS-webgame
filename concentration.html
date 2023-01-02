@@ -58,13 +58,39 @@
     let completed = [];
     let clickable = false;
 
-    function shuffled() { //Fisher-Yates Shuffle
+    function shuffle() { //Fisher-Yates Shuffle
         for (let i = 0; colorCopy.length > 0; i += 1) {
             const randomIndex = Math.floor(Math.random() * colorCopy.length);
             shuffled = shuffled.concat(colorCopy.splice(randomIndex, 1));
         }
 
     }
+
+    function createCard(i) { //div.card > div.card-inner > (div.card-front + div.card-back)
+        const card = document.createElement('div');
+        card.className = 'card'; //.card tag
+        const cardInner = document.createElement('div');
+        cardInner.className = 'card-inner';
+        const cardFront = document.createElement('div');
+        cardFront.className = 'card-front';
+        const cardBack = document.createElement('div');
+        cardBack.className = 'card-back';
+        cardBack.style.backgroundColor = shuffled[i];
+        cardInner.appendChild(cardFront);
+        cardInner.appendChild(cardBack);
+        card.appendChild(cardInner);
+        return card;
+    }
+
+    function startGame() {
+        shuffle();
+        for(let i = 0; i < total; i += 1) {
+            const card = createCard(i);
+            $wrapper.appendChild(card);
+        }
+    }
+    startGame();
+
 </script>
 </body>
 </html>
