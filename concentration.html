@@ -82,10 +82,37 @@
         return card;
     }
 
+    function onClickCard() {
+        this.classList.toggle('flipped');
+        clicked.push(this);
+            if (clicked.length !== 2) {
+                return;
+            }
+            const firstBackColor = clicked[0].querySelector('.card-back').style.backgroundColor;
+            const secondBackColor = clicked[1].querySelector('.card-back').style.backgroundColor;
+            if (firstBackColor === secondBackColor) {
+                completed.push(clicked[0]);
+                completed.push(clicked[1]);
+                clicked = []; // === completed = completed.concat(clicked);
+                if (completed.length !== total) {
+                    return;
+                }
+                alert('congratulations!!!');
+                return;
+            } //if different
+            setTimeout(() => { 
+                clicked[0].classList.remove('flipped');
+                clicked[1].classList.remove('flipped');
+                clicked = [];
+            }, 500);
+    }
+
     function startGame() {
+        clickable = false;
         shuffle();
         for(let i = 0; i < total; i += 1) {
             const card = createCard(i);
+            card.addEventListener('click', onClickCard);
             $wrapper.appendChild(card);
         }
 
@@ -101,6 +128,7 @@
             });
         }, 5000);
     }
+
     startGame();
 
 </script>
