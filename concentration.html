@@ -97,7 +97,10 @@
                 if (completed.length !== total) {
                     return;
                 }
-                alert('congratulations!!!');
+                setTimeout(()=>{
+                    alert('congratulations!!!');
+                    resetGame();
+                }, 1000);
                 return;
             } //if different
             setTimeout(() => { 
@@ -128,8 +131,15 @@
             });
         }, 5000);
     }
-
     startGame();
+
+    function resetGame() {
+        $wrapper.innerHTML = '';
+        colorCopy = colors.concat(colors);
+        shuffled = [];
+        completed = [];
+        startGame();
+    }
 
 </script>
 </body>
