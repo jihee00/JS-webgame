@@ -22,6 +22,32 @@
 </head>
 
 <body>
-    
+<table id="table">
+    <tbody></tbody>
+</table>
+<div id="result"></div>
+<script>
+    const $tbody = document.querySelector('#table tbody');
+    const $result = document.querySelector('#result');
+    const row = 10;
+    const cell = 10;
+    const mine = 10;
+    const CODE = {
+        NORMAL: -1,
+        QUESTION: -2,
+        FLAG: -3,
+        QUESTION_MINE: -4,
+        FLAG_MINE: -5,
+        MINE: -6,
+        OPENED: 0,
+    }
+    let data;
+
+    function plantMine() {
+    }
+    function drawTable() {
+    }
+    drawTable();
+</script>
 </body>
 </html>
