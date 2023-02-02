@@ -103,6 +103,27 @@
         }
     }
 
+    function countMine(rowIndex, cellIndex) {
+        
+    }
+    
+    function onLeftClick(event) {
+        const target = event.target; //td
+        const rowIndex = target.parentNode.rowIndex;
+        const cellIndex = target.cellIndex;
+        const cellData = data[rowIndex][cellIndex];
+        if (cellData === CODE.NORMAL) { //closed
+            const count = countMine(rowIndex, cellIndex);
+            target.textContent = count || '';
+            target.className = 'opened';
+            data[rowIndex][cellIndex] = count;
+
+        } else if (cellData === CODE.MINE) {
+
+        }
+
+    }
+
     function drawTable() {
         data = plantMine();
         data.forEach((row) => {
@@ -116,6 +137,7 @@
             });
             $tbody.append($tr);
             $tbody.addEventListener('contextmenu', onRightClick);
+            $tbody.addEventListener('click', onLeftClick);
         });
     }
     drawTable();
