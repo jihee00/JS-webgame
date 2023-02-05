@@ -127,7 +127,7 @@
         const cellData = data[rowIndex][cellIndex];
         if (cellData === CODE.NORMAL) { //closed
             const count = countMine(rowIndex, cellIndex);
-            target.textContent = count || '';
+            target.textContent = count || ''; // A ?? B - if null, undefined B. A || B - if A is false, B.
             target.className = 'opened';
             data[rowIndex][cellIndex] = count;
 
