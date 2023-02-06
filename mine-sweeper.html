@@ -39,9 +39,10 @@
         QUESTION_MINE: -4,
         FLAG_MINE: -5,
         MINE: -6,
-        OPENED: 0,
+        OPENED: 0, //0~8
     }
     let data;
+    let openCount = 0;
 
     function plantMine() {
         const candidate = Array(row * cell).fill().map((arr, i) => {
@@ -121,6 +122,7 @@
     }
 
     function open(rowIndex, cellIndex) {
+        if(data[rowIndex]?.[cellIndex] >= CODE.OPENED) return;
         const target = $tbody.children[rowIndex]?.children[cellIndex];
         if(!target) {
             return;
@@ -129,6 +131,8 @@
         target.textContent = count || ''; // A ?? B - if null, undefined B. A || B - if A is false, B.
         target.className = 'opened';
         data[rowIndex][cellIndex] = count;
+        openCount++;
+        console.log(openCount);
         return count;
     }
 
