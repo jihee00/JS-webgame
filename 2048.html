@@ -32,6 +32,35 @@
     const $table = document.getElementById('table');
     const $score = document.getElementById('score');
     let data = [];
+
+    // $table -> $fragment -> $tr -> $td
+    function startGame() {
+        const $fragment = document.createDocumentFragment();
+        [1, 2, 3, 4].forEach(function() {
+            const rowData = [];
+            data.push(rowData);
+            const $tr = document.createElement('tr');
+            [1, 2, 3, 4].forEach(() => {
+                rowData.push(0);
+                const $td = document.createElement('td');
+                $tr.appentChild($td);
+            });
+            $fragment.appendChild($tr);
+        });
+        $table.appendChild($fragment);
+        put2ToRandomCell();
+        draw();
+    }
+
+    function put2ToRandomCell() {
+
+    }
+
+    function draw() {
+
+    }
+
+    startGame();
 </script>
 </body>
 </html>
