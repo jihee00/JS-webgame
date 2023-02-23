@@ -82,6 +82,19 @@
     }
 
     startGame();
+
+    window.addEventListener('keyup', (event) => {
+        if(event.key === 'ArrowUp') {
+            moveCells('up');
+        } else if(event.key === 'ArrowDown') {
+            moveCells('down');
+        } else if(event.key === 'ArrowLeft') {
+            moveCells('left');
+        } else if(event.key === 'ArrowRight') {
+            moveCells('right');
+        }
+    });
+
 </script>
 </body>
 </html>
