@@ -83,9 +83,26 @@
 
     startGame();
 
+    data = [
+        [0, 2, 4, 2],
+        [0, 0, 8, 0],
+        [2, 2, 4, 8],
+        [0, 16, 0, 4],
+    ];
+    draw();
+
     function moveCells(direction) {
-
-
+        switch (direction) {
+            case 'left':
+                break;
+            case 'right':
+                break;
+            case 'up':
+                break;
+            case 'down':
+                break;
+        }
+        draw();
     }
 
     window.addEventListener('keyup', (event) => {
